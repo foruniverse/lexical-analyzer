@@ -6,7 +6,7 @@
 using namespace std;
 
 #define  MAXRESERVED 9
-#define  input "test.txt"
+#define  input "input.txt"
 #define  output "output.txt"
 typedef enum{
     IF,ELSE,RETURN,INT,CHAR,CIN,COUT,WHILE,FOR,
@@ -166,6 +166,13 @@ int main()
                     else if(now==' ')
                     {
                         tokenpos++;
+                    }else if(now=='\t')
+                    {
+                        tokenpos++;
+                    }else if(now=='\n')
+                    {
+                        state=100;
+
                     }else if(isalpha(now)|| now=='_')
                     {
                         state=7;

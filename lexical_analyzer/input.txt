@@ -1,0 +1,10 @@
+int main()
+{
+	cout "hello world";
+    int token_number = 666;
+	int token_number1 = token_number;
+	// this is a comment;
+	/* this is a 
+	   multiply comment  */
+ 	return 0;
+}
