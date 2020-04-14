@@ -9,7 +9,7 @@ using namespace std;
 #define  input "input.txt"
 #define  output "output.txt"
 typedef enum{
-    IF,ELSE,RETURN,INT,CHAR,CIN,COUT,WHILE,FOR,
+    IF,ELSE,RETURN,INT,CHAR,CIN,COUT,WHILE,FOR,ENDL,
     // reserverd words
     SLASH,NUMBER,ADD,MINUS,ASSIGN,LBRACKET,RBRACKET,LPAREN,RPAREN,GREATER,LESS,SEMICOLON,MULTIPLY,COMMA,ERROR,
     //operator
@@ -64,6 +64,9 @@ void printtokentype(TokenType temp)
             break;
         case FOR:
             cout<<"FOR";
+            break;
+        case ENDL:
+            cout<<"ENDL";
             break;
         case SLASH:
             cout<<"SLASH";

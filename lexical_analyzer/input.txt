@@ -1,6 +1,7 @@
 int main()
 {
-	cout "hello world";
+    char token_char ='h';
+	cout "hello world" endl;
     int token_number = 666;
 	int token_number1 = token_number;
 	// this is a comment;

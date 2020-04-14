@@ -13,7 +13,7 @@
 
   ![DFA](screensnap/DFA.png)
 
-- **正则表达式 *regular expression* **  
+- **正则表达式 *regular expression***  
 
   ![regular](screensnap/regular.png)
 
@@ -49,8 +49,14 @@
   (----LPAREN
   )----RPAREN
   {----LBRACKET
+  char----CHAR
+  token_char----ID
+  =----ASSIGN
+  'h'----CHAR_TOKEN
+  ;----SEMICOLON
   cout----COUT
   "hello world"----STRING
+  endl----ID
   ;----SEMICOLON
   int----INT
   token_number----ID
