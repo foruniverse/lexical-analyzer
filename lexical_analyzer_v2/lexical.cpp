@@ -1,154 +1,75 @@
-#include<iostream>
-#include<vector>
-#include<string>
-#include<cstring>
-#include<fstream>
-using namespace std;
+#include"lexical.h"
 
-#define  MAXRESERVED 9
-#define  input "input.txt"
-#define  output "output.txt"
-typedef enum{
-    IF,ELSE,RETURN,INT,CHAR,CIN,COUT,WHILE,FOR,ENDL,
-    // reserverd words
-    SLASH,NUMBER,ADD,MINUS,ASSIGN,LBRACKET,RBRACKET,LPAREN,RPAREN,GREATER,LESS,SEMICOLON,MULTIPLY,COMMA,ERROR,
-    //operator
-    STRING,CHAR_TOKEN,
-    //id
-    ID
-} TokenType;
-
-typedef struct TOKEN {
-    string str;
-    TokenType token;
-} TOKEN;
-
-static const TOKEN reservedWords[MAXRESERVED]
-={
-    {"if",IF},{"else",ELSE},{"return",RETURN},{"int",INT},
-    {"char",CHAR},{"cin",CIN},{"cout",COUT},{"while",WHILE},
-    {"for",FOR}
-};
-
-TOKEN getToken(void);
-void inserttoken(string,int,int,TokenType);
-TokenType checkword(string);
-string program;
-vector<pair<string,TokenType>> Token;
-void printtokentype(TokenType temp)
+void Scan::printRes()
 {
-    switch(temp)
-    {
-        case INT:
-            cout<<"INT";
-            break;
-        case ID:
-            cout<<"ID";
-            break;
-        case ELSE:
-            cout<<"ELSE";
-            break;
-        case RETURN:
-            cout<<"RETURN";
-            break;
-        case CHAR:
-            cout<<"CHAR";
-            break;
-        case CIN:
-            cout<<"CIN";
-        case COUT:
-            cout<<"COUT";
-            break;
-        case WHILE:
-            cout<<"WHILE";
-            break;
-        case FOR:
-            cout<<"FOR";
-            break;
-        case ENDL:
-            cout<<"ENDL";
-            break;
-        case SLASH:
-            cout<<"SLASH";
-            break;
-        case NUMBER:
-            cout<<"NUMBER";
-            break;
-        case ADD:
-            cout<<"ADD";
-            break;
-        case MINUS:
-            cout<<"MINUS";
-            break;
-        case ASSIGN:
-            cout<<"ASSIGN";
-            break;
-        case LBRACKET:
-            cout<<"LBRACKET";
-            break;
-        case RBRACKET:
-            cout<<"RBACKET";
-            break;
-        case LPAREN:
-            cout<<"LPAREN";
-            break;
-        case RPAREN:
-            cout<<"RPAREN";
-            break;
-        case GREATER:
-            cout<<"GREATER";
-            break;
-        case LESS:
-            cout<<"LESS";
-            break;
-        case SEMICOLON:
-            cout<<"SEMICOLON";
-            break;
-        case MULTIPLY:
-            cout<<"MULTIPLY";
-            break;
-        case COMMA:
-            cout<<"COMMA";
-            break;
-        case ERROR:
-            cout<<"ERROR";
-            break;
-        case STRING:
-            cout<<"STRING";
-            break;
-        case CHAR_TOKEN:
-            cout<<"CHAR_TOKEN";
-            break;
-        default:
-            cout<<"not found in the table";// this should never happen;
-    }
+    for_each(token_list.begin(),token_list.end(),printToken);
 }
-int main()
+
+void Scan::insertToken(std::string line,int left,int right,TokenType type)
 {
-    ifstream file(input,ios::in);
-    if(!file.is_open())
-    {
-        cout<<"file open failed"<<endl;
-        return 1;
-    }
-    
+    Token token(line,left,right,type);
+    this->token_list.push_back(token);
+};
+ 
+//对源代码按行处理
+void Scan::lexicalAnalyzer()
+{
+    //每行,大概用line标识更贴切
+    string program;
+    //dfa 初始状态位0
     int state=0;
+    //读取的每行行数
     int plength;
+    //记录当前处理到每行的第几位
     int currentpos;
+    //记录上次token处理后的位置,即下个token的开始位置
     int tokenpos;
+    //错误行号,遇到不符合词法规则就退出,并显示错误行号
     int lineno=0;
+    //当前字符
     char now;
+    //用于处理多行注释的状态位
     bool commentnotfinished=false;
+    //错误状态位,为真则退出
     bool iserror=false;
-    while(getline(file,program))
+    //按行处理
+    /*
+     *一下部分为自动机的主流程,按照自动机的经典结构实现
+        while()
+        {
+        switch()
+            state a:
+                jump c;
+                break
+            state b:
+
+            state c:
+                jump b;
+        }
+        自动机的状态索引没有采用状态表,效率有所下降,但随之而来的是代码可阅读性大幅加强
+        
+        具体的状态转移参考附带的DFA状态转移图
+
+        代码阅读应仔细参考附带的画的DFA,否则可谓是鬼神莫识(  ^ ω ^  )
+        
+        DFA代码均手工编写,未采用任何自动工具,这点从编码风格也可看出
+        
+        但实际上,这类DFA代码均可由"正则表达式"->thompson算法->子集构造法->最小化DFA得到
+     */
+    while(getline(input,program))
     {
-        if(iserror)
+        if(iserror)// 检测到错误词法就跳出
             break;
-        plength=program.size();
+        plength=program.size();//使用临时变量储存行大小.节省函数调用开销
+        //初始位置为0,由于大部分时候解析都在行尾结束,每次进入新循环时都要重置
         currentpos=0;
+        //每次解析出一个token后,就将tokenpos置为token后的下一索引处
         tokenpos=0;
+        //储存行号,便于报错
         lineno++;
+        //初始状态,这是状态机中最重要的变量,所有的状态跳转都由它来中转
         state=0; 
+        //用于多行注释,这就是上文提到的特殊情况,在这种情况下,解析并不以行尾结束而结束
         if(commentnotfinished)
         {
             state=9;
@@ -160,10 +81,12 @@ int main()
                 break;
             switch(state)
             {
+                //初始状态为0,按照DFA构建第一层状态转化
                 case 0:
                     currentpos++;
                     if(isdigit(now))
                     {
+                    //状态转移
                         state=6;
                     }
                     else if(now==' ')
@@ -171,19 +94,20 @@ int main()
                         tokenpos++;
                     }else if(now=='\t')
                     {
+                        //tab 和 \n 符都需要单独避开
                         tokenpos++;
                     }else if(now=='\n')
                     {
                         state=100;
-
                     }else if(isalpha(now)|| now=='_')
                     {
                         state=7;
                     }else if(now=='/')
                     {
                         state=8;
+                        //到达行尾,这是'/'不会再向当行注释和多行注释转换
                         if(currentpos==plength)
-                            inserttoken(program,tokenpos,currentpos-1,SLASH);
+                            insertToken(program,tokenpos,currentpos-1,SLASH);
                     }else if(now=='\'')
                     {
                         state=1;
@@ -192,52 +116,54 @@ int main()
                         state=4;
                     }else
                     {
+                        //排除上述后，即是单目运算符,直接插入token
                         state=0;
                         switch(now)
                         {
                             case '+':
-                                inserttoken(program,tokenpos,currentpos-1,ADD);
+                                insertToken(program,tokenpos,currentpos-1,ADD);
                                 break;
                             case '-':
-                                inserttoken(program,tokenpos,currentpos-1,MINUS);
+                                insertToken(program,tokenpos,currentpos-1,MINUS);
                                 break;
                             case '*' :
-                                inserttoken(program,tokenpos,currentpos-1,MULTIPLY);
+                                insertToken(program,tokenpos,currentpos-1,MULTIPLY);
                                 break;
                             case '(':
-                                inserttoken(program,tokenpos,currentpos-1,LPAREN);
+                                insertToken(program,tokenpos,currentpos-1,LPAREN);
                                 break;
                             case ')':
-                                inserttoken(program,tokenpos,currentpos-1,RPAREN);
+                                insertToken(program,tokenpos,currentpos-1,RPAREN);
                                 break;
                             case '{':
-                                inserttoken(program,tokenpos,currentpos-1,LBRACKET);
+                                insertToken(program,tokenpos,currentpos-1,LBRACKET);
                                 break;
                             case '}':
-                                inserttoken(program,tokenpos,currentpos-1,RBRACKET);
+                                insertToken(program,tokenpos,currentpos-1,RBRACKET);
                                 break;
                             case ';':
-                                inserttoken(program,tokenpos,currentpos-1,SEMICOLON);
+                                insertToken(program,tokenpos,currentpos-1,SEMICOLON);
                                 break;
                             case ',':
-                                inserttoken(program,tokenpos,currentpos-1,COMMA);
+                                insertToken(program,tokenpos,currentpos-1,COMMA);
                                 break;
                             case '>':
-                                inserttoken(program,tokenpos,currentpos-1,GREATER);
+                                insertToken(program,tokenpos,currentpos-1,GREATER);
                                 break;
                             case '<':
-                                inserttoken(program,tokenpos,currentpos-1,LESS);
+                                insertToken(program,tokenpos,currentpos-1,LESS);
                                 break;
                             case '=':
-                                inserttoken(program,tokenpos,currentpos-1,ASSIGN);
+                                insertToken(program,tokenpos,currentpos-1,ASSIGN);
                                 break;
                             default:
                                 state=100;
-                                inserttoken(program,tokenpos,currentpos-1,ERROR);
+                                insertToken(program,tokenpos,currentpos-1,ERROR);
                         }
                         tokenpos=currentpos;
                     }
                     break;
+                //错误状态位
                 case 100:
                     iserror=true;
                     break;
@@ -265,10 +191,10 @@ int main()
                     }else state=3;
                     break;
                 case 3:
-                
+                //这些状态位要参考DFA图,重要重要重要重要
                     if(now=='\'')
                     {
-                        inserttoken(program,tokenpos,currentpos,CHAR_TOKEN);
+                        insertToken(program,tokenpos,currentpos,CHAR_TOKEN);
                         state=0;
                         tokenpos=currentpos+1;
                     }
@@ -286,7 +212,7 @@ int main()
                         state=5;
                     }else if(now=='"')
                     {
-                        inserttoken(program,tokenpos,currentpos,STRING);
+                        insertToken(program,tokenpos,currentpos,STRING);
                         state=0;
                         tokenpos=currentpos+1;
                     }
@@ -309,28 +235,28 @@ int main()
                     if(!isdigit(program[currentpos]))
                     {
                         state=0;
-                        inserttoken(program,tokenpos,currentpos-1,NUMBER); 
+                        insertToken(program,tokenpos,currentpos-1,NUMBER); 
                         tokenpos=currentpos;
                     }else currentpos++;
-                    if(currentpos==plength)
-                        inserttoken(program,tokenpos,currentpos-1,NUMBER);//in case line ends;
+                    if(currentpos==plength)//在这种情况下,遇到行尾就终止解析,但不是所有情况
+                        insertToken(program,tokenpos,currentpos-1,NUMBER);//in case line ends;
                     break;
                 case 7:
                     if(isalpha(now)||isdigit(now)||now=='_')
                         currentpos++;
                     else {
 
-                        inserttoken(program,tokenpos,currentpos-1,checkword(program.substr(tokenpos,currentpos-tokenpos)));   
+                        insertToken(program,tokenpos,currentpos-1,ID);   
                         state=0;
                         tokenpos=currentpos;
                     }
                     if(currentpos==plength)
-                        inserttoken(program,tokenpos,currentpos-1,checkword(program.substr(tokenpos,currentpos-tokenpos)));   
+                        insertToken(program,tokenpos,currentpos-1,ID);   
                     break;
-                case 8:
+                case 8://解析多行注释
                     if(program[currentpos]!='*'&& program[currentpos]!='/')
                     {
-                        inserttoken(program,tokenpos,currentpos-1,SLASH);
+                        insertToken(program,tokenpos,currentpos-1,SLASH);
                         tokenpos=currentpos;
                         state=0;
                     }else if(now=='/')
@@ -345,12 +271,13 @@ int main()
                     while(now!='*'&& currentpos<plength)
                     {
                         now=program[++currentpos];
-                    }
+                    }//遍历到行尾,或者遇到'*'字符,
                     if(now=='*')
-                    {
+                    {//跳转到下一个状态
                         state=10;
                         currentpos++;
                     }else {
+                        //多行注释,无疑,在下一行继续上一行的解析 
                         commentnotfinished=true;
                     }
                     break;
@@ -371,36 +298,8 @@ int main()
                     break;
             }
         }
-    }
-    vector<pair<string,TokenType>>::iterator ite=Token.begin();
-    for(;ite!=Token.end();ite++)
-    {
-        cout<<ite->first<<" ";
-//        cout<<"----";
-        printtokentype(ite->second);
-        cout<<endl;
+        //错误处理则显示行号
     }
     if(iserror)
-        cout<<"error happened in line:"<<lineno<<endl;
-    file.close();
-    return 0;
-}
-
-void inserttoken(string program,int tokenpos, int currentpos,TokenType type)
-{
-    pair<string,TokenType> token;
-    string temp(begin(program)+tokenpos,begin(program)+currentpos+1);
-    token.first=temp;
-    token.second=type;
-    Token.push_back(token);
-}
-
-TokenType checkword(string a)
-{
-    for(int i=0;i<MAXRESERVED;i++)
-    {
-        if(strcmp(a.c_str(),reservedWords[i].str.c_str())==0)
-            return reservedWords[i].token;
-    }
-    return ID;
-}
+        std::cout<<"error happened in line :"<<lineno<<std::endl;
+};

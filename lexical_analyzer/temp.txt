@@ -1,0 +1,154 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- VIM STARTING ---
+000.000  000.000: Allocated generic buffers
+003.000  003.000: locale set
+003.000  000.000: clipboard setup
+003.000  000.000: window checked
+004.000  001.000: inits 1
+011.000  007.000: parsing arguments
+011.000  000.000: expanding arguments
+012.000  001.000: shell init
+012.000  000.000: Termcap init
+012.000  000.000: inits 2
+012.000  000.000: init highlight
+014.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\ftoff.vim
+015.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\Vundle.vim\autoload\vundle.vim
+016.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\Vundle.vim\autoload\vundle\config.vim
+027.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\vim-fugitive\ftdetect\fugitive.vim
+028.000  009.000  009.000: sourcing D:\Vim\vim81\vim81\filetype.vim
+029.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\ftplugin.vim
+030.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\indent.vim
+034.000  002.000  002.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+035.000  004.000  002.000: sourcing D:\Vim\vim81\vim81\syntax\synload.vim
+035.000  005.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syntax.vim
+037.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+038.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+039.000  003.000  003.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+040.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\filetype.vim
+041.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\indent.vim
+043.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+044.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+051.000  009.000  009.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+055.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+056.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+063.000  010.000  009.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+063.000  050.000  014.000: sourcing $HOME\_vimrc
+063.000  001.000: sourcing vimrc file(s)
+070.000  002.000  002.000: sourcing C:\Users\12563\.vim\bundle\vim-fugitive\plugin\fugitive.vim
+072.000  001.000  001.000: sourcing C:\Users\12563\.vim\bundle\auto-pairs\plugin\auto-pairs.vim
+073.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\plugin\lightline.vim
+080.000  006.000  006.000: sourcing C:\Users\12563\.vim\bundle\vim-easymotion\plugin\EasyMotion.vim
+083.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\getscriptPlugin.vim
+084.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\gzip.vim
+085.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\logiPat.vim
+085.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\manpager.vim
+086.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\matchparen.vim
+087.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\netrwPlugin.vim
+088.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\rrhelper.vim
+088.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\spellfile.vim
+088.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\tarPlugin.vim
+089.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\tohtml.vim
+090.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\vimballPlugin.vim
+090.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\zipPlugin.vim
+090.000  014.000: loading plugins
+091.000  001.000: loading packages
+091.000  000.000: loading after plugins
+091.000  000.000: inits 3
+092.000  001.000: reading viminfo
+092.000  000.000: setting raw mode
+096.000  004.000: start termcap
+096.000  000.000: clearing screen
+097.000  001.000: opening buffers
+102.000  001.000  001.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline.vim
+103.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\tab.vim
+106.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme.vim
+109.000  004.000  004.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme\powerline.vim
+109.000  005.000  001.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme\default.vim
+113.000  010.000: BufEnter autocommands
+113.000  000.000: editing files in windows
+113.000  000.000: VimEnter autocommands
+113.000  000.000: before starting main loop
+137.000  024.000: first screen update
+137.000  000.000: --- VIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- VIM STARTING ---
+001.000  001.000: Allocated generic buffers
+003.000  002.000: locale set
+003.000  000.000: clipboard setup
+003.000  000.000: window checked
+004.000  001.000: inits 1
+011.000  007.000: parsing arguments
+011.000  000.000: expanding arguments
+012.000  001.000: shell init
+012.000  000.000: Termcap init
+012.000  000.000: inits 2
+013.000  001.000: init highlight
+014.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\ftoff.vim
+015.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\Vundle.vim\autoload\vundle.vim
+016.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\Vundle.vim\autoload\vundle\config.vim
+027.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\vim-fugitive\ftdetect\fugitive.vim
+028.000  009.000  009.000: sourcing D:\Vim\vim81\vim81\filetype.vim
+029.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\ftplugin.vim
+030.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\indent.vim
+033.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+034.000  003.000  002.000: sourcing D:\Vim\vim81\vim81\syntax\synload.vim
+034.000  004.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syntax.vim
+036.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+039.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+039.000  004.000  002.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+040.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\filetype.vim
+041.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\indent.vim
+043.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+045.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+051.000  009.000  008.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+054.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+056.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\syntax\syncolor.vim
+062.000  009.000  008.000: sourcing C:\Users\12563\.vim\bundle\gruvbox\colors\gruvbox.vim
+062.000  049.000  014.000: sourcing $HOME\_vimrc
+062.000  000.000: sourcing vimrc file(s)
+070.000  003.000  003.000: sourcing C:\Users\12563\.vim\bundle\vim-fugitive\plugin\fugitive.vim
+073.000  001.000  001.000: sourcing C:\Users\12563\.vim\bundle\auto-pairs\plugin\auto-pairs.vim
+075.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\plugin\lightline.vim
+082.000  006.000  006.000: sourcing C:\Users\12563\.vim\bundle\vim-easymotion\plugin\EasyMotion.vim
+086.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\getscriptPlugin.vim
+086.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\gzip.vim
+087.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\logiPat.vim
+088.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\manpager.vim
+088.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\matchparen.vim
+089.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\netrwPlugin.vim
+090.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\rrhelper.vim
+090.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\spellfile.vim
+090.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\tarPlugin.vim
+091.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\tohtml.vim
+092.000  001.000  001.000: sourcing D:\Vim\vim81\vim81\plugin\vimballPlugin.vim
+092.000  000.000  000.000: sourcing D:\Vim\vim81\vim81\plugin\zipPlugin.vim
+092.000  018.000: loading plugins
+092.000  000.000: loading packages
+093.000  001.000: loading after plugins
+093.000  000.000: inits 3
+094.000  001.000: reading viminfo
+094.000  000.000: setting raw mode
+098.000  004.000: start termcap
+099.000  001.000: clearing screen
+100.000  001.000: opening buffers
+105.000  001.000  001.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline.vim
+107.000  000.000  000.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\tab.vim
+111.000  001.000  001.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme.vim
+115.000  006.000  005.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme\powerline.vim
+115.000  007.000  001.000: sourcing C:\Users\12563\.vim\bundle\lightline.vim\autoload\lightline\colorscheme\default.vim
+119.000  011.000: BufEnter autocommands
+119.000  000.000: editing files in windows
+120.000  001.000: VimEnter autocommands
+120.000  000.000: before starting main loop
+142.000  022.000: first screen update
+142.000  000.000: --- VIM STARTED ---

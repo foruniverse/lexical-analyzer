@@ -8,6 +8,21 @@ using namespace std;
 #define  MAXRESERVED 9
 #define  input "input.txt"
 #define  output "output.txt"
+
+/*----------------------tree---------------------*/
+#define MAXCHILDLEN 3
+typedef enum {expression,compound,selection,iteration_while,iteration_for,return_stmt} Node_Kind;
+typedef struct node
+{
+    struct node* child[MACHILDLEN];
+    struct node* sibing;
+    TOk tok;
+    Node_Kind node_kind;
+} node;
+
+node *  
+/*----------------------tree---------------------*/
+const bool print_token=false;
 typedef enum{
     IF,ELSE,RETURN,INT,CHAR,CIN,COUT,WHILE,FOR,ENDL,
     // reserverd words
@@ -30,9 +45,11 @@ static const TOKEN reservedWords[MAXRESERVED]
     {"for",FOR}
 };
 
-TOKEN getToken(void);
+typedef pair<string,TokenType> TOK;
+tok getToken(void);
 void inserttoken(string,int,int,TokenType);
 TokenType checkword(string);
+void print_token();
 string program;
 vector<pair<string,TokenType>> Token;
 void printtokentype(TokenType temp)
@@ -371,21 +388,42 @@ int main()
                     break;
             }
         }
-    }
+    } 
+    print_token();
+    file.close();
+    return 0;
+}
+vector<Token>::iterator ite=Token.begin();
+void parse()
+{
+
+}
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------*/
+
+
+void print_token()
+{
     vector<pair<string,TokenType>>::iterator ite=Token.begin();
     for(;ite!=Token.end();ite++)
     {
         cout<<ite->first<<" ";
-//        cout<<"----";
+        cout<<"----";
         printtokentype(ite->second);
         cout<<endl;
     }
     if(iserror)
         cout<<"error happened in line:"<<lineno<<endl;
-    file.close();
-    return 0;
-}
 
+}
 void inserttoken(string program,int tokenpos, int currentpos,TokenType type)
 {
     pair<string,TokenType> token;
