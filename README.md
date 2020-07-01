@@ -1,4 +1,4 @@
-# C-   compilier
+# C-   complier
 > 课程设计  
 
 ## 更新
